@@ -12,17 +12,16 @@ const timerInput = function () {
 			if (answer === "exit") return rl.close();
 			if (answer === "b") {
 				rl.write("\x07\r");
-
-				// rl.write("\x07");
 				timerInput();
-			}
-			if (answer > 0 && answer < 10) {
+			} else if (answer > 0 && answer < 10 && !isNaN(answer)) {
 				rl.write(`setting timer for ${answer} seconds...\n`);
 				setTimeout(() => {
 					rl.write("\x07\r");
-					// rl.write("\x07");
 					timerInput();
 				}, answer * 1000);
+			} else {
+				rl.write("Please enter a valid input\r");
+				timerInput();
 			}
 		}
 	);
